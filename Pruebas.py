@@ -1433,7 +1433,7 @@ for n in range(len(lifestore_sales)):
         print(lifestore_sales[n][1], lifestore_sales[n][4])
 """
 
-"""
+
 #PRODUCTOS CON DEVOLUCION
 productos_devueltos = []
 
@@ -1448,11 +1448,55 @@ for n in range(len(lifestore_products)):
             productos_devueltos.append(y)
 
 
-print(productos_devueltos)
 print()
 print("Cantidad de Productos devueltos: ", len(productos_devueltos))
-"""
+print("-------------------ID-------------------|| -----------------PRODUCTO------------------||-------REFUND-----")
+#Utilizo el metodo sort y le agrego el parametro reverse para ordenar la lista de mayor a menor, utilizando la segunda posicion de la sublista.
+productos_devueltos.sort(key=lambda x: x[1], reverse=True)
+for n in range(len(productos_devueltos)):
+    print(n+1,".-", end=" ")
+    for j in range(len(productos_devueltos[n])):
+        print(productos_devueltos[n][j], end=" ")
+        print(" || ", end= ' ')
+    print()
+#FIN PRODUCTOS CON DEVOLUCION#
 
+"""
+#lISTA 5O PRODUCTOS CON MENOS VENTAS, CON STOCK#
+productos_con_menorventa= []
+
+#Mismo Procedimiento que las listas anteriores, solo que aqui añadiremos el valor categoria la lista y, para despues poder agruparla por categoria
+for n in range(len(lifestore_products)):
+    y = []
+    x=0
+    id_p = lifestore_products[n][0]
+    name = lifestore_products[n][1] #Tomamos el nombre de la categoria del producto
+    category = lifestore_products[n][3]
+    stock = lifestore_products[n][4]
+    for j in range(len(lifestore_sales)):
+        if (lifestore_products[n][0] == lifestore_sales[j][1]) and (lifestore_sales[j][4] == 0):
+            x+=1
+    y.append(id_p)
+    y.append(name)
+    y.append(category) #Insertamos el nombre de la categoria, en la lista
+    y.append(x)
+    y.append(stock)
+    productos_con_menorventa.append(y) #La lista final que se añadira sera y = ["Producto", "Categoria", Ventas]
+
+#productos_con_menorventa es la lista de listas que contiene el producto y cuantas busquedas tiene [Producto, Categoria, Ventas]
+print("--ID--||-----------PRODUCTOS------------------------------------------||-------------CATEGORIA-------------||---------VENTAS---------||-------STOCK-------")
+#Utilizo el metodo sort, aqui utilizamos la segunda posicion que es donde estan las ventas
+productos_con_menorventa.sort(key=lambda x: x[3])
+#Ordeno por stock(mayor a menor)
+productos_con_menorventa.sort(key=lambda x: x[4], reverse=True)
+for n in range(50):
+    print(n+1,".-", end=" ")
+    for j in range(len(productos_con_menorventa[n])):
+        print(productos_con_menorventa[n][j], end=" ")
+        print(" || ", end= ' ')
+    print()
+#FIN LISTA 5O PRODUCTOS CON MENOS VENTAS CON STOCK#
+"""
 """
 #INICIO LISTA 50 PRODUCTOS MAS VENDIDOS#
 productos_venta = []
@@ -1557,10 +1601,11 @@ for n in range(50):
         print(productos_con_menorventa[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN LISTA 5O PRODUCTOS CON MENOS VENTAS, AGRUPADOS POR CATEGORIA#
 """
 
 """
-#lISTA 100 PRODUCTOS CON MENOS BUSQUEDAS, AGRUPADOS POR CATEGORIA#
+#LISTA 100 PRODUCTOS CON MENOS BUSQUEDAS, AGRUPADOS POR CATEGORIA#
 productos_con_menorbusqueda= []
 
 #Mismo Procedimiento que las listas anteriores, solo que aqui añadiremos el valor categoria la lista y, para despues poder agruparla por categoria
@@ -1589,6 +1634,7 @@ for n in range(len(productos_con_menorbusqueda)):
         print(productos_con_menorbusqueda[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN LISTA 100 PRODUCTOS CON MENOS BUSQUEDAS, AGRUPADOS POR CATEGORIA#
 """
 
 """
@@ -1617,6 +1663,7 @@ for n in range(len(productos_con_mejorevaluacion)):
         print(productos_con_mejorevaluacion[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN PRODUCTOS CON MEJOR EVALUACION (SCORE = 5)#
 """
 
 """
@@ -1645,6 +1692,7 @@ for n in range(len(productos_con_mejorevaluacion)):
         print(productos_con_mejorevaluacion[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN PRODUCTOS MEJOR EVALUADOS#
 """
 
 """
@@ -1673,6 +1721,7 @@ for n in range(len(productos_con_menorevaluacion)):
         print(productos_con_menorevaluacion[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN#
 """
 
 """
@@ -1701,6 +1750,7 @@ for n in range(len(productos_con_menorevaluacion)):
         print(productos_con_menorevaluacion[n][j], end=" ")
         print(" || ", end= ' ')
     print()
+#FIN#
 """
 
 """
@@ -1771,7 +1821,11 @@ print()
 print("--------------------------------------------------------------------------------------------------------------------")
 #FIN TOTAL DE INGRESOS Y DEVOLUCIONES#
 """
+
+"""
+#VENTAS POR MES#
 meses = [0,0,0,0,0,0,0,0,0,0,0,0]
+meses_ventas = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 #Itero sobre las ventas, por cada venta itero sobre los productos y mediante un if identifico cuales son las coincidencias
 for n in range(len(lifestore_sales)):
@@ -1780,51 +1834,80 @@ for n in range(len(lifestore_sales)):
     date = lifestore_sales[n][3]
     mes = date.split(sep='/')
     for j in range(len(lifestore_products)):
-        if (lifestore_sales[n][1] == lifestore_products[j][0]):
+        if (lifestore_sales[n][1] == lifestore_products[j][0]) and (lifestore_sales[n][4] == 0):
             if mes[1] == '01':
+                meses_ventas[0]+=lifestore_products[j][2]
                 meses[0]+=1
             if mes[1] == '02':
+                meses_ventas[1]+=lifestore_products[j][2]
                 meses[1]+=1
             if mes[1] == '03':
+                meses_ventas[2]+=lifestore_products[j][2]
                 meses[2]+=1
             if mes[1] == '04':
+                meses_ventas[3]+=lifestore_products[j][2]
                 meses[3]+=1
             if mes[1] == '05':
+                meses_ventas[4]+=lifestore_products[j][2]
                 meses[4]+=1
             if mes[1] == '06':
+                meses_ventas[5]+=lifestore_products[j][2]
                 meses[5]+=1
             if mes[1] == '07':
+                meses_ventas[6]+=lifestore_products[j][2]
                 meses[6]+=1
             if mes[1] == '08':
+                meses_ventas[7]+=lifestore_products[j][2]
                 meses[7]+=1
             if mes[1] == '09':
+                meses_ventas[8]+=lifestore_products[j][2]
                 meses[8]+=1
             if mes[1] == '10':
+                meses_ventas[9]+=lifestore_products[j][2]
                 meses[9]+=1
             if mes[1] == '11':
+                meses_ventas[10]+=lifestore_products[j][2]
                 meses[10]+=1
             if mes[1] == '12':
+                meses_ventas[11]+=lifestore_products[j][2]
                 meses[11]+=1
 
+print("--MES--||----NUMERO DE VENTAS---||--TOTAL INGRESOS POR MES--")
 print()
-print("Enero: ", meses[0])
-print("Febrero: ", meses[1])
-print("Marzo: ", meses[2])
-print("Abril: ", meses[3])
-print("Mayo: ", meses[4])
-print("Junio: ", meses[5])
-print("Julio: ", meses[6])
-print("Agosto: ",meses[7])
-print("Septiembre: ", meses[8])
-print("Octubre: ", meses[9])
-print("Noviembre: ", meses[10])
-print("Diciembre: ", meses[11])
+print("Enero: ||", meses[0]," || $",meses_ventas[0])
+print("Febrero: ||", meses[1]," || $",meses_ventas[1])
+print("Marzo: ||", meses[2]," || $",meses_ventas[2])
+print("Abril: ||", meses[3]," || $",meses_ventas[3])
+print("Mayo: ||", meses[4]," || $",meses_ventas[4])
+print("Junio: ||", meses[5]," || $",meses_ventas[5])
+print("Julio: ||", meses[6]," || $",meses_ventas[6])
+print("Agosto: ||",meses[7]," || $",meses_ventas[7])
+print("Septiembre: ||", meses[8]," || $",meses_ventas[8])
+print("Octubre: ||", meses[9]," || $",meses_ventas[9])
+print("Noviembre: ||", meses[10]," || $",meses_ventas[10])
+print("Diciembre: ||", meses[11]," || $",meses_ventas[11])
 print()
-print("Total: ", sum(meses))
-print(meses)
+print("------------------------------------------------------------------")
+print("TOTALES: ",sum(meses)," || $",sum(meses_ventas)," ||")
+print("------------------------------------------------------------------")
+print("PROMEDIO MENSUAL: $", float((sum(meses_ventas)/12)))
+print("------------------------------------------------------------------")
+#FIN VENTAS POR MES#
+"""
 
 """
-z=[]
+#FECHAS QUE NO ESTAN DENTRO DEL 2020#
+x=0
+print("Ventas Registradas en un año diferente al 2020")
 for n in range(len(lifestore_sales)):
+    date = lifestore_sales[n][3]
+    año = date.split(sep='/')
     for j in range(len(lifestore_products)):
+        if (lifestore_sales[n][1] == lifestore_products[j][0]):
+            if año[2] != '2020':
+                print("Id_Venta: ",lifestore_sales[n][0], " Month: ",año[1], " Year: ",año[2])
+                x+=lifestore_products[j][2]
+
+print("Cantidad: ",x)
+#FIN FECHAS#
 """
