@@ -1428,7 +1428,7 @@ lifestore_searches = [
 ]
 
 # INICIO DEL LOGIN DE USUARIO #
-users = {}
+users = {'Admin': 'root'}
 status = ""
 opcion = ""
 
@@ -1441,7 +1441,7 @@ while status != "q":
     if status == "s":
         login = input("Ingresa tu usuario: ")
         passw = input("Ingresa tu contraseña: ")
-
+        print(users)
         if login in users and users[login] == passw:
             print("\n====> Has iniciado sesión como ", login,"☺")
             print("--------------------------------------------")
@@ -1461,6 +1461,9 @@ while status != "q":
                 print("|  11.- VENTAS QUE NO ESTAN DENTRO DEL AÑO 2020                                   |")
                 print("|  12.- PRODUCTOS DEVUELTOS                                                       |")
                 print("|  13.- LISTA DE PRODUCTOS CON MENORES VENTAS Y MAYOR STOCK                       |")
+                print("|  14.- VALOR DEL INVENTARIO POR PRODUCTO                                         |")
+                print("|  15.- VENTAS POR CATEGORIA                                                      |")
+                print("|  16.- PRODUCTOS CON MENOR BUSQUEDA Y MAYOR STOCK                                |")
                 print("|  0- Salir                                                                       |")
                 print("----------------------------------------------------------------------------------")
 
@@ -1472,11 +1475,13 @@ while status != "q":
                     for n in range(len(lifestore_products)):
                         y = [] #En esta lista iran los productos y sus respectivas ventas, reseteo su valor para que cada producto tenga su sublista con su nombre y sus respectivas ventas
                         x=0
+                        id_p = lifestore_products[n][0]
                         name = lifestore_products[n][1]
                         stock = lifestore_products[n][4]
                         for j in range(len(lifestore_sales)):
                             if (lifestore_products[n][0] == lifestore_sales[j][1]) and (lifestore_sales[j][4] == 0): #Al añadir esta condicion no tomara en cuenta a los productos con devolucion
                                 x+=1 #Al encontrar una coincidencia en el Id_Producto de ambas listas le suma uno a la variable x, al final tendra el valor de las veces que se vendio dicho producto
+                        y.append(id_p)
                         y.append(name) #Añado el nombre del producto y = ["Nombre_Prod"]
                         y.append(x) #Añado el total de ventas del producto y = ["Nombre_Prod", no_Ventas]
                         y.append(stock) #Añado el stock y = ["Nombre_Prod", no_Ventas, Stock]
@@ -1485,9 +1490,9 @@ while status != "q":
                     #productos_venta es la lista de listas que contiene el producto y cuantas ventas tiene [Producto, Ventas, Stock]
                     #print(productos_venta)
                     print("=====>NO SE INCLUYEN PRODUCTOS CON DEVOLUCION")
-                    print("-------------------PRODUCTOS-------------------|| -----------------VENTAS---------------||------STOCK---")
+                    print("--ID--||-------------PRODUCTOS-------------------|| -----------------VENTAS---------------||------STOCK---")
                     #Utilizo el metodo sort y le agrego el parametro reverse para ordenar la lista de mayor a menor, utilizando la segunda posicion de la sublista.
-                    productos_venta.sort(key=lambda x: x[1], reverse=True)
+                    productos_venta.sort(key=lambda x: x[2], reverse=True)
                     for n in range(50):
                         print(n+1,".-", end=" ")
                         for j in range(len(productos_venta[n])):
@@ -1506,14 +1511,15 @@ while status != "q":
                         for j in range(len(lifestore_searches)):
                             if lifestore_products[n][0] == lifestore_searches[j][1]:
                                 x+=1
+                        y.append(lifestore_products[n][0])
                         y.append(name)
                         y.append(x)
                         productos_busqueda.append(y)
                     #productos_busqueda es la lista de listas que contiene el producto y cuantas busquedas tiene [Producto, Busquedas]
                     #print(productos_busqueda)
-                    print("-------------------PRODUCTOS-------------------|| -------------BUSQUEDAS--------------------")
+                    print("---ID---||-------------PRODUCTOS-------------------|| -------------BUSQUEDAS--------------------")
                     #Utilizo el metodo sort y le agrego el parametro reverse para ordenar la lista de mayor a menor, utilizando la segunda posicion de la sublista.
-                    productos_busqueda.sort(key=lambda x: x[1], reverse=True)
+                    productos_busqueda.sort(key=lambda x: x[2], reverse=True)
                     for n in range(len(productos_busqueda)):
                         print(n+1,".-", end=" ")
                         for j in range(len(productos_busqueda[n])):
@@ -1545,7 +1551,7 @@ while status != "q":
                     productos_con_menorventa.sort(key=lambda x: x[2])
                     #Despues de ordenar los productos mostrando primero los que tienen menores ventas, ordenamos por categoria y de esa forma agrupamos los datos por categoria
                     productos_con_menorventa.sort(key=lambda x: x[1], reverse=True)
-                    for n in range(50):
+                    for n in range(len(productos_con_menorventa)):
                         print(n+1,".-", end=" ")
                         for j in range(len(productos_con_menorventa[n])):
                             print(productos_con_menorventa[n][j], end=" ")
@@ -1696,19 +1702,21 @@ while status != "q":
                     for n in range(len(lifestore_products)):
                         y = [] #En esta lista iran los productos y sus respectivas ventas, reseteo su valor para que cada producto tenga su sublista con su nombre y sus respectivas ventas
                         x=0
+                        id_p = lifestore_products[n][0]
                         name = lifestore_products[n][1]
                         price = lifestore_products[n][2]
                         for j in range(len(lifestore_sales)):
                             if (lifestore_products[n][0] == lifestore_sales[j][1]) and (lifestore_sales[j][4] == 0): #Al añadir esta condicion no tomara en cuenta a los productos con devolucion
                                 x+=1 #Al encontrar una coincidencia en el Id_Producto de ambas listas le suma uno a la variable x, al final tendra el valor de las veces que se vendio dicho producto
+                        y.append(id_p)
                         y.append(name) #Añado el nombre del producto y = ["Nombre_Prod"]
                         y.append(x) #Añado el total de ventas del producto y = ["Nombre_Prod", no_Ventas]
                         y.append(price * x) #Añado el ingreso del producto y = ["Nombre_Prod", no_Ventas, ingreso]
                         ingresos.append(y) #Añado esa lista a otra lista, donde iran todos los productos, ventas y ingreso
 
-                    print("-------------------PRODUCTOS-------------------|| -----------------VENTAS------------------||---------INGRESOS--------")
+                    print("--ID---||-------------PRODUCTOS-------------------|| -----------------VENTAS------------------||---------INGRESOS--------")
                     #Utilizo el metodo sort y le agrego el parametro reverse para ordenar la lista de mayor a menor, utilizando la segunda posicion de la sublista.
-                    ingresos.sort(key=lambda x: x[1], reverse=True)
+                    ingresos.sort(key=lambda x: x[3], reverse=True)
                     for n in range(len(ingresos)):
                         print(n+1,".-", end=" ")
                         for j in range(len(ingresos[n])):
@@ -1719,7 +1727,7 @@ while status != "q":
                     #Sumamos los ingresos de cada prodcuto para sacar el total
                     total_ingresos = 0
                     for n in range(len(ingresos)):
-                        total_ingresos+=ingresos[n][2]
+                        total_ingresos+=ingresos[n][3]
 
                     print("--------------------------------------------------------------------------------------------------------------------")
                     print()
@@ -1895,6 +1903,86 @@ while status != "q":
                             print(" || ", end= ' ')
                         print()
                     #FIN LISTA 5O PRODUCTOS CON MENOS VENTAS CON STOCK#
+                elif opcion == '14':
+                    #VALOR DEL INVENTARIO#
+                    inventario = []
+                    total_inv = 0
+                    for n in range(len(lifestore_products)):
+                        y = []
+                        name = lifestore_products[n][1]
+                        id_p = lifestore_products[n][0]
+                        valor = lifestore_products[n][2] * lifestore_products[n][4]
+                        y.append(id_p)
+                        y.append(name)
+                        y.append(valor)
+                        inventario.append(y)
+
+                    for n in range(len(inventario)):
+                        total_inv+=inventario[n][2]
+
+                    print()
+                    print("--ID--||---PRODUCTO---------------------||----VALOR DEL INVENTARIO-----")
+                    inventario.sort(key=lambda x: x[2], reverse=True)
+                    for n in range(len(inventario)):
+                        print(n+1,".-", end=" ")
+                        for j in range(len(inventario[n])):
+                            print(inventario[n][j], end=" ")
+                            print(" || ", end= ' ')
+                        print()
+
+                    print("TOTAL ==> $", total_inv)
+                    #FIN VALOR DEL INVENTARIO#
+                elif opcion == '15':
+                    #Categorias Ventas#
+                    y = []
+                    for n in range(len(lifestore_products)):
+                        y.append(lifestore_products[n][3])
+
+                    categorias = []
+                    for x in y:
+                        if x not in categorias:
+                            categorias.append(x)
+                    #print (categorias)
+
+                    categoria_ventas = [0,0,0,0,0,0,0,0]
+                    for n in range(len(lifestore_products)):
+                        for k in range(len(lifestore_sales)):
+                            if lifestore_products[n][0] == lifestore_sales[k][1]:
+                                for j in range(len(categorias)):
+                                    if lifestore_products[n][3] == categorias[j]:
+                                        categoria_ventas[j]+=1
+
+                    for n in range(len(categorias)):
+                        print("Categoria: ",categorias[n], "|| Ventas: ",categoria_ventas[n])
+                    #FIN CATEGORIAS VENTA#
+                elif opcion == '16':
+                    productos_con_menorbusqueda= []
+                    #Mismo Procedimiento que las listas anteriores, solo que aqui añadiremos el valor categoria la lista y, para despues poder agruparla por categoria
+                    for n in range(len(lifestore_products)):
+                        y = []
+                        x=0
+                        name = lifestore_products[n][1] #Tomamos el nombre de la categoria del producto
+                        stock = lifestore_products[n][4]
+                        for j in range(len(lifestore_searches)):
+                            if lifestore_products[n][0] == lifestore_searches[j][1]:
+                                x+=1
+                        y.append(lifestore_products[n][0])
+                        y.append(name)
+                        y.append(stock) #Insertamos el stock
+                        y.append(x)
+                        productos_con_menorbusqueda.append(y)
+
+                    print("------ID----||------------PRODUCTOS-------------------------------||------------STOCK--------------------||---------BUSQUEDAS---------------")
+                    #Utilizo el metodo sort, aqui utilizamos la segunda posicion que es donde esta el stock
+                    productos_con_menorbusqueda.sort(key=lambda x: x[2])
+                    #Despues de ordenar los productos mostrando primero los que tienen menores busquedas
+                    productos_con_menorbusqueda.sort(key=lambda x: x[3], reverse=True)
+                    for n in range(len(productos_con_menorbusqueda)):
+                        print(n+1,".-", end=" ")
+                        for j in range(len(productos_con_menorbusqueda[n])):
+                            print(productos_con_menorbusqueda[n][j], end=" ")
+                            print(" || ", end= ' ')
+                        print()
                 else:
                     print("INGRESA UNA OPCION VALIDA DEL MENU!!!")
         else:

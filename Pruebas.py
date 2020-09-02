@@ -1432,15 +1432,60 @@ for n in range(len(lifestore_sales)):
     if lifestore_sales[n][4] == 1:
         print(lifestore_sales[n][1], lifestore_sales[n][4])
 """
+#Categorias Ventas#
+y = []
+for n in range(len(lifestore_products)):
+    y.append(lifestore_products[n][3])
 
+categorias = []
+for x in y:
+    if x not in categorias:
+     categorias.append(x)
+print (categorias)
 
+categoria_ventas = [0,0,0,0,0,0,0,0]
+for n in range(len(lifestore_products)):
+    for k in range(len(lifestore_sales)):
+        if lifestore_products[n][0] == lifestore_sales[k][1]:
+            for j in range(len(categorias)):
+                if lifestore_products[n][3] == categorias[j]:
+                    categoria_ventas[j]+=1
+
+for n in range(len(categorias)):
+    print("Categoria: ",categorias[n], "|| Ventas: ",categoria_ventas[n])
+#FIN CATEGORIAS VENTA#
+"""
+#VALOR DEL INVENTARIO#
+inventario = []
+for n in range(len(lifestore_products)):
+    y = []
+    name = lifestore_products[n][1]
+    id_p = lifestore_products[n][0]
+    valor = lifestore_products[n][2] * lifestore_products[n][4]
+    y.append(id_p)
+    y.append(name)
+    y.append(valor)
+    inventario.append(y)
+
+print()
+print("--ID--||---PRODUCTO---------------------||----VALOR DEL INVENTARIO-----")
+inventario.sort(key=lambda x: x[2], reverse=True)
+for n in range(len(inventario)):
+    print(n+1,".-", end=" ")
+    for j in range(len(inventario[n])):
+        print(inventario[n][j], end=" ")
+        print(" || ", end= ' ')
+    print()
+
+"""
+"""
 #PRODUCTOS CON DEVOLUCION
 productos_devueltos = []
 
 for n in range(len(lifestore_products)):
     name = lifestore_products[n][1]
     for j in range(len(lifestore_sales)):
-        if (lifestore_products[n][0] == lifestore_sales[j][1]) and (lifestore_sales[j][4] == 1):
+        for j in range(len(lifestore_sales)): and (lifestore_sales[j][4] == 1):
             y = []
             y.append(lifestore_sales[j][1])#Id_Producto
             y.append(name) #Nombre Producto
@@ -1460,6 +1505,7 @@ for n in range(len(productos_devueltos)):
         print(" || ", end= ' ')
     print()
 #FIN PRODUCTOS CON DEVOLUCION#
+"""
 
 """
 #lISTA 5O PRODUCTOS CON MENOS VENTAS, CON STOCK#
