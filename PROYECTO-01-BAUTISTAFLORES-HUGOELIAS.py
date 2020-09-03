@@ -1441,7 +1441,7 @@ while status != "q":
     if status == "s":
         login = input("Ingresa tu usuario: ")
         passw = input("Ingresa tu contraseña: ")
-        print(users)
+        #print(users)
         if login in users and users[login] == passw:
             print("\n====> Has iniciado sesión como ", login,"☺")
             print("--------------------------------------------")
