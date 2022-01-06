@@ -21,7 +21,7 @@ Realizar un ánalisis de la rotación de productos para la gerencia de ventas, i
 
 [Documentación 📂](https://github.com/EliasBautista/Curso_Emtech/blob/master/Requerimientos/ProyectoFinal1.pdf) - Aquí se puede consultar y descargar la documentación completa del primer proyecto.
 
-[Fuente de datos 📋](https://github.com/EliasBautista/Curso_Emtech/blob/master/Requerimientos/ProyectoFinal2.pdf) - Aquí se puede consultar y descargar los datos en formato de listas en python, con la información relevante para resolver el proyecto.
+[Fuente de datos 📋](https://github.com/EliasBautista/Curso_Emtech/blob/master/Datos/Listas.py) - Aquí se puede consultar y descargar los datos en formato de listas en python, con la información relevante para resolver el proyecto.
 
 ### Solución 🔎
 Como solución a las necesidades de la gerencia de ventas se pesentó un reporte con un análisis detallado de los elementos más importantes relacionados al inventario de productos. Dentro del documento se sugiere una estrategia de productos a retirar del mercado, así como un par de observaciones respecto a la base de dato
@@ -48,7 +48,7 @@ La Dirección de Synergy Logistics ha solicitado al equipo operativo, realizar u
 
 [Documentación 📂](https://github.com/EliasBautista/Curso_Emtech/blob/master/Requerimientos/ProyectoFinal2.pdf) - Aquí se puede consultar y descargar la documentación completa del segundo proyecto.
 
-[Fuente de datos 📋](https://github.com/EliasBautista/Curso_Emtech/blob/master/Requerimientos/ProyectoFinal2.pdf) - Aquí se puede consultar y descargar los datos en formato csv, con la información relevante para resolver el proyecto.
+[Fuente de datos 📋](https://github.com/EliasBautista/Curso_Emtech/blob/master/Datos/synergy_logistics_database.csv) - Aquí se puede consultar y descargar los datos en formato csv, con la información relevante para resolver el proyecto.
 
 ### Solución 🔎
 De las anteriores opciones la mejor es la opción número dos, ya que aun excluyendo el método de transporte “Road”, la suma del valor total de los tres medios de transporte restantes es mayor al 80% del valor total que se considera en la opción tres y también es el doble del valor de la opción uno.
@@ -58,10 +58,46 @@ A modo de conclusión me gustaría agregar que no es la mejor opción enfocarse 
 
 [Reporte 📑](https://github.com/EliasBautista/Curso_Emtech/blob/master/Soluciones/REPORTE_02_BAUTISTAFLORES_HUGOELIAS.pdf) - Aquí se puede consultar y descargar el reporte entregado a la Synergy Logistics, la solución al segundo proyecto.
 
-[Reporte Jupiter Notebook 📓](https://github.com/EliasBautista/Curso_Emtech/blob/master/Soluciones/REPORTE_02_BAUTISTAFLORES_HUGOELIAS.pdf) - Para reforzar la información del reporte se puede consultar también este reporte generado a partir del código hecho en un notebook de Jupiter con Python.
+[Reporte Jupyter Notebook 📓](https://github.com/EliasBautista/Curso_Emtech/blob/master/Soluciones/ANALISIS_02_%20BAUTISTA_ELIAS.pdf) - Para reforzar la información del reporte se puede consultar también este reporte generado a partir del código hecho en un notebook de Jupyter con Python.
 
 [Código Python 💻](https://github.com/EliasBautista/Curso_Emtech/tree/master/Programas_Python) - Aquí se puede descargar el código Python utilizado para analizar los datos del inventario (synergy_logistics_database.csv + Proyecto02.py).
 
 [Probar Código 👨🏻‍💻](https://replit.com/@EliasBautista/Proyecto02#main.py) - En este link se puede probar el código generado de este proyecto, se utilizaron varias librerías como numpy y pandas para generar dataframes a partir del csv.
 
 ### Capturas 📷
+<br/>
+
+_Código en Replit del primer proyecto_
+
+![Código](https://raw.githubusercontent.com/EliasBautista/Curso_Emtech/master/Img/Proyecto1_01.png)
+
+<br/>
+
+_Capturas del jupyter notebook_
+
+![Código](https://raw.githubusercontent.com/EliasBautista/Curso_Emtech/master/Img/Proyecto2_01.png)
+
+<br/>
+
+![Código](https://raw.githubusercontent.com/EliasBautista/Curso_Emtech/master/Img/Proyecto2_02.png)
+
+<br/>
+
+![Código](https://raw.githubusercontent.com/EliasBautista/Curso_Emtech/master/Img/Proyecto2_03.png)
+
+<br/>
+
+_Código en Replit del segundo proyecto_
+
+![Código](https://raw.githubusercontent.com/EliasBautista/Curso_Emtech/master/Img/Proyecto2_04.png)
+
+<br/>
+
+## Autores ✒️
+
+
+* **Elias Bautista** - *Desarrollador* - [GitHub](https://github.com/EliasBautista)
+
+## Expresiones de Gratitud 🎁
+
+Gracias por ver este repositorio y a toda la comunidad Emtech que creo estos contenidos para poder retar mis conocimientos en Data Science.
